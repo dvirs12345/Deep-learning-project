@@ -102,10 +102,15 @@ def get_divided(df):
     y_train = df['price actual'].as_matrix()
 
     X_train, X_test, y_train, y_test = skl.train_test_split(X_train, y_train, test_size=0.2)
+    plt.plot(X_train, y_train, 'ro', label='Original data')
+    plt.title('Linear Regression Result')
+    plt.legend()
+    plt.show()
     return X_train, X_test, y_train, y_test
 
 
 def naive_model():
+    # Linear regression
     pass
 
 
@@ -157,16 +162,16 @@ def main():
     fdf = clean_data(edf, wdf)
     # print(wdf.head())
 
-    ax = plot_series(df=edf, column='total load actual', ylabel='Total Load (MWh)',
-                     title='Actual Total Load (First 2 weeks - Original)', end=24 * 7 * 2)
+    ax = plot_series(df=edf, column='price actual', ylabel='price (EUR/MWh)',
+                     title='Actual Price (First 2 weeks - Original)', end=24 * 7 * 2)
     plt.show()
-
     # print(edf[edf.isnull().any(axis=1)].tail())
 
     pd.set_option('max_columns', 20)
     print(fdf.describe().round(2))
 
     print(fdf.shape)
+
 
 
 main()
